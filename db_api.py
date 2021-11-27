@@ -14,10 +14,12 @@ import time
 import sys
 
 
-def Scrap_bbc_landing():
+def Scrap_bbc_landing(allowed_domains, start_urls):
     pool = ProcessPool(nodes=4)
 
     def f_runner(spider):
+        ScrapperSpider.allowed_domains = [allowed_domains]
+        ScrapperSpider.start_urls = [start_urls]
         from twisted.internet import reactor
         from scrapy.settings import Settings
         import Scrapper.settings as my_settings
@@ -29,31 +31,32 @@ def Scrap_bbc_landing():
         deferred.addBoth(lambda _: reactor.stop())
         reactor.run()
 
-
+    #ScrapperSpider.allowed_domains = [allowed_domains]
+    #ScrapperSpider.start_urls = [start_urls]
+    #print("\nstart URLS:{}".format(ScrapperSpider.start_urls))
     results = pool.amap(f_runner, [ScrapperSpider])
     t = 0
     while not results.ready():
-        time.sleep(5); print(".", end=' '); t= t+5
+        time.sleep(5);
+        print(".", end=' ');
+        t = t + 5
         if t == 240:
-            print("\nProcess stalling...DO NOT EXECUTE THE WHOLE SCRIPT BUT EACH FUNCTION ALONE...EXITING\n"); return None
+            print("\nProcess stalling...DO NOT EXECUTE THE WHOLE SCRIPT BUT EACH FUNCTION ALONE...EXITING\n");
+            return None
 
     pool.clear()
 
+
 def dbmongo_query_articles(query):
-    connection = pymongo.MongoClient(MONGODB_SERVER,MONGODB_PORT)
+    connection = pymongo.MongoClient(MONGODB_SERVER, MONGODB_PORT)
     db = connection[MONGODB_DB]
     collection = db[MONGODB_COLLECTION]
-    array = list(collection.find({'body': {"$regex": query, '$options' : 'i'}}))
+    array = list(collection.find({'body': {"$regex": query, '$options': 'i'}}))
     print(*array, sep='\n')
-    print("\nNumber of articles found:{}" .format(len(array)))
+    print("\nNumber of articles found:{}".format(len(array)))
+
 
 def dbmongo_clear(query):
     connection = pymongo.MongoClient(MONGODB_SERVER, MONGODB_PORT)
     db = connection[MONGODB_DB]
     db.getCollection(query).deleteMany({})
-
-
-
-
-
-

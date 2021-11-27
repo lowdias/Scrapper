@@ -14,9 +14,9 @@ class ScrapperSpider(Spider):
     
     # allowed_domains = ["stackoverflow.com"]
     # start_urls = ["http://stackoverflow.com/questions?pagesize=50&sort=newest"]
-    allowed_domains = ["bbc.com"]
+    #allowed_domains = []
     
-    start_urls = ["http://bbc.com"]
+    #start_urls = []
    
             
     def parse(self, response):

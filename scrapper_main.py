@@ -10,7 +10,7 @@ from db_api import Scrap_bbc_landing, dbmongo_query_articles, dbmongo_clear
 
 
 if __name__ == '__main__':
-    Scrap_bbc_landing()
+    Scrap_bbc_landing("bbc.com", "https://bbc.com")
 
 #Non case sensitive search for a word in the article scrapped
 dbmongo_query_articles("covid")
