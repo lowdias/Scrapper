@@ -12,7 +12,7 @@ import pymongo
 from Scrapper.settings import MONGODB_SERVER, MONGODB_PORT, MONGODB_COLLECTION, MONGODB_DB
 from scrapy.exceptions import DropItem
 import logging
-#from scrapy import log
+
 
 
 

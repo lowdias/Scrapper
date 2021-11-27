@@ -18,7 +18,7 @@ ITEM_PIPELINES = {
     'Scrapper.pipelines.MongoDBPipeline': 100
 }
 
-MONGODB_SERVER = "localhost"
+MONGODB_SERVER = "mongodb://sirono:sirono@cluster0-shard-00-00.cqozl.mongodb.net:27017,cluster0-shard-00-01.cqozl.mongodb.net:27017,cluster0-shard-00-02.cqozl.mongodb.net:27017/myFirstDatabase?ssl=true&replicaSet=atlas-ezgo9e-shard-0&authSource=admin&retryWrites=true&w=majority"
 MONGODB_PORT = 27017
 MONGODB_DB = "bbc"
 MONGODB_COLLECTION = "articles"

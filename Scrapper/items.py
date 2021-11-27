@@ -2,7 +2,7 @@
 """
 Created on Thu Apr 23 00:53:46 2020
 
-@author: PC GAMER
+@author: ILIAS KAMAL
 """
 
 import scrapy

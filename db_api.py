@@ -2,11 +2,11 @@
 """
 Created on Mon Apr 27 03:35:48 2020
 
-@author: PC GAMER
+@author: ILIAS KAMAL
 """
 
 import pymongo
-from Scrapper.settings import MONGODB_SERVER, MONGODB_PORT, MONGODB_COLLECTION, MONGODB_DB
+from Scrapper.settings import MONGODB_PORT, MONGODB_COLLECTION, MONGODB_DB, MONGODB_SERVER
 from pathos.multiprocessing import ProcessPool
 from pathos.threading import ThreadPool
 from Scrapper.spiders.scrapper_spider import ScrapperSpider
@@ -27,7 +27,7 @@ def Scrap_bbc_landing():
         runner = CrawlerRunner(settings=crawler_settings)
         deferred = runner.crawl(spider)
         deferred.addBoth(lambda _: reactor.stop())
-        reactor.run()  
+        reactor.run()
 
 
     results = pool.amap(f_runner, [ScrapperSpider])
@@ -36,7 +36,7 @@ def Scrap_bbc_landing():
         time.sleep(5); print(".", end=' '); t= t+5
         if t == 240:
             print("\nProcess stalling...DO NOT EXECUTE THE WHOLE SCRIPT BUT EACH FUNCTION ALONE...EXITING\n"); return None
-            
+
     pool.clear()
 
 def dbmongo_query_articles(query):
@@ -47,9 +47,13 @@ def dbmongo_query_articles(query):
     print(*array, sep='\n')
     print("\nNumber of articles found:{}" .format(len(array)))
 
+def dbmongo_clear(query):
+    connection = pymongo.MongoClient(MONGODB_SERVER, MONGODB_PORT)
+    db = connection[MONGODB_DB]
+    db.getCollection(query).deleteMany({})
 
 
 
 
 
-    
+

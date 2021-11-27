@@ -2,7 +2,7 @@
 """
 Created on Thu Apr 23 04:06:42 2020
 
-@author: PC GAMER
+@author: ILIAS KAMAL
 """
 import scrapy
 from scrapy import Spider
@@ -18,26 +18,17 @@ class ScrapperSpider(Spider):
     
     start_urls = ["http://bbc.com"]
    
-    # def parse(self, response):
-    #     questions = Selector(response).xpath('//div[@class="summary"]/h3')
-        
-        
-    #     for question in questions:
-    #         item = StackItem()
-    #         item['title'] = question.xpath('a[@class="question-hyperlink"]/text()').extract()[0]
-    #         item['url'] = question.xpath('a[@class="question-hyperlink"]/@href').extract()[0]
-    #         yield item
             
     def parse(self, response):
             
        
         item = StackItem()
-        item['title'] = response.css('head > title::text').get()
+        item['title'] = response.css('title::text').get()
         item['url'] = response.url
-        item['body'] = response.css('div.story-body__inner > p::text').extract()
+        item['body'] = response.css('p::text').extract()
         item['body'] = "".join(item['body'])
         if item['body'] == [] :
-            item['body'] = response.css('div.body-content > p::text').extract()
+            item['body'] = response.css('p::text').extract()
             item['body'] = "".join(item['body'])
         yield item
             
