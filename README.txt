@@ -8,4 +8,5 @@ local mongodb server(localhost) port:27017
 dbmongo_query_articles("China"):
 Non case sensitive search for the word China in the articles scrapped.
 
+The mongo database is hosted on the cloud at cloud.mongodb.com
 
