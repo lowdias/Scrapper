@@ -14,7 +14,7 @@ import time
 import sys
 
 
-def Scrap_bbc_landing(allowed_domains, start_urls):
+def Scrap_landing(allowed_domains, start_urls):
     pool = ProcessPool(nodes=4)
 
     def f_runner(spider):

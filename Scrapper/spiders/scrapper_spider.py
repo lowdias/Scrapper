@@ -32,7 +32,7 @@ class ScrapperSpider(Spider):
             item['body'] = "".join(item['body'])
         yield item
             
-        for articles in response.css('a.media__link::attr(href)').extract() :
+        for articles in response.css('a::attr(href)').extract() :
             if not "http" in articles:
                 articles = response.urljoin(articles)
             yield scrapy.Request(articles, callback=self.parse)
