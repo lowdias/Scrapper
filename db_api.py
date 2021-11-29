@@ -40,8 +40,8 @@ def Scrap_landing(allowed_domains, start_urls):
         time.sleep(5);
         print(".", end=' ');
         t = t + 5
-        if t == 240:
-            print("\nProcess stalling...DO NOT EXECUTE THE WHOLE SCRIPT BUT EACH FUNCTION ALONE...EXITING\n");
+        if t == 30:
+            print("\nProcess limited to 30 seconds...EXITING\n");
             return None
 
     pool.clear()
